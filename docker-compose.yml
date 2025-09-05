@@ -1,0 +1,40 @@
+version: '3.8'
+
+# Define all the services for your application
+services:
+
+  # 1. The Backend API Service
+  backend:
+    build:
+      context: ./server # Path to the backend folder
+    container_name: backend-container
+    ports:
+      - "5000:5000" # Map host port 5000 to container port 5000
+    environment:
+      # Pass the database connection URL to your Node app
+      # 'mongodb-container' is the name of our MongoDB service below
+      MONGO_URI: mongodb://mongodb-container:27017/yourDatabaseName
+    depends_on:
+      - mongodb # Ensures mongodb starts before the backend
+
+  # 2. The Frontend React Service
+  frontend:
+    build:
+      context: ./cliend # Path to the frontend folder
+    container_name: frontend-container
+    ports:
+      - "3000:80" # Map host port 3000 to the container's Nginx port 80
+
+  # 3. The MongoDB Database Service
+  mongodb:
+    image: mongo:latest # Use the official MongoDB image from Docker Hub
+    container_name: mongodb-container
+    ports:
+      - "27017:27017"
+    volumes:
+      # This line persists your database data on your host machine
+      - mongo-data:/data/db
+
+# Define a 'volume' for MongoDB to persist data
+volumes:
+  mongo-data:
