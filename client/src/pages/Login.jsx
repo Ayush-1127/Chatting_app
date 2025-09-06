@@ -176,7 +176,7 @@ const Login = () => {
                   fullWidth
                   disabled={isLoading}
                 >
-                  Login
+                  Logins
                 </Button>
 
                 <Typography textAlign={"center"} m={"1rem"}>
