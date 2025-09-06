@@ -213,7 +213,7 @@ const Chat = ({ chatId, user }) => {
         <Stack
           direction={"row"}
           height={"100%"}
-          padding={"1rem"}
+          padding={"2rem"}
           alignItems={"center"}
           position={"relative"}
         >
